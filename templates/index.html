@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Sistema bitcoin - Página inicial{% endblock %}
+
+{% block main %}
+
+    <h2>Informações sobre o endereço</h2>
+    <b>Endereço:</b> {{ address }}<br>
+    <b>Total de satoshis recebidos(confirmado):</b> {{ total_received }}<br>
+    <b>Total de satoshis enviados(confirmado):</b> {{ total_sent }}<br>
+    <b>Saldo(confirmado):</b> {{ balance }}<br>
+    <b>Saldo(não confirmado):</b> {{ unconfirmed_balance }}<br>
+    <b>Saldo total(confirmados e não confirmados):</b> {{ final_balance }}<br>
+    <b>Número de transações(confirmadas):</b> {{ n_tx }}<br>
+    <b>Número de transações(não confirmadas):</b> {{ unconfirmed_n_tx }}<br>
+    <b>Número total de transações(confirmados e não confirmados):</b> {{ final_n_tx }}
+
+    <br><br>
+
+    <p>
+          * Transações confirmadas = Entraram em um bloco(confirmations > 0)<br>
+         ** Transações não confirmadas = Não entraram em um bloco(confirmations <= 0)<br>
+        *** Transações confirmadas e não confirmadas
+    </p>
+
+    {% if txrefs %}
+        <h4>Informações das últimas transações desse endereço</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hash da transação</th>
+                    <th>Data</th>
+                    <th>Valor(Satoshis)</th>
+                    <th>Transações</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in txrefs %}
+                <tr>
+                    <td><a href="{% url 'transaction' data.tx_hash %}">{{ data.tx_hash }}</a></td>
+                    <td>{{ data.confirmed|date:'d/m/Y h:i' }}</td>
+                    <td>{{ data.value }}</td>
+                    <td>{{ data.confirmations }}</td>
+                    <td>
+                        {% if data.confirmations > 0 %}
+                            <span class="text-success">Done</span>
+                        {% else %}
+                            <span class="text-warning">Pending</span>
+                        {% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

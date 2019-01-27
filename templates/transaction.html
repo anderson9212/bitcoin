@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Sistema bitcoin - Transação{% endblock %}
+
+{% block main %}
+    <h2>Informações da transação: </h2>
+    <b>Hash do block:</b> {{ block_hash }}<br>
+    <b>Hash da transação:</b> {{ hash }}<br>
+    <b>Altura do block:</b> {{ block_height }}<br>
+    <b>Total:</b> {{ total }}<br>
+    <b>Tamanho:</b> {{ size }}<br>
+    <b>Data de Confirmado:</b> {{ confirmed|date:'d/m/Y h:i' }}<br>
+    <b>Data de recebido:</b> {{ received|date:'d/m/Y h:i' }}<br>
+    <b>Número de confirmações:</b> {{ confirmations }}<br>
+    <b>Status:</b>
+        {% if confirmations > 0 %}
+            <span class="text-success">Done</span>
+        {% else %}
+            <span class="text-warning">Pending</span>
+        {% endif %}
+{% endblock %}
