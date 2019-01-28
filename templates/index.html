@@ -24,32 +24,34 @@
 
     {% if txrefs %}
         <h4>Informações das últimas transações desse endereço</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Hash da transação</th>
-                    <th>Data</th>
-                    <th>Valor(Satoshis)</th>
-                    <th>Transações</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for data in txrefs %}
-                <tr>
-                    <td><a href="{% url 'transaction' data.tx_hash %}">{{ data.tx_hash }}</a></td>
-                    <td>{{ data.confirmed|date:'d/m/Y h:i' }}</td>
-                    <td>{{ data.value }}</td>
-                    <td>{{ data.confirmations }}</td>
-                    <td>
-                        {% if data.confirmations > 1 %}
-                            <span class="text-success">Done</span>
-                        {% else %}
-                            <span class="text-warning">Pending</span>
-                        {% endif %}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive table-striped table-hover">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Hash da transação</th>
+                        <th>Data</th>
+                        <th>Valor(Satoshis)</th>
+                        <th>Transações</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in txrefs %}
+                    <tr>
+                        <td><a href="{% url 'transaction' data.tx_hash %}">{{ data.tx_hash }}</a></td>
+                        <td>{{ data.confirmed|date:'d/m/Y h:i' }}</td>
+                        <td>{{ data.value }}</td>
+                        <td>{{ data.confirmations }}</td>
+                        <td>
+                            {% if data.confirmations > 1 %}
+                                <span class="text-success">Done</span>
+                            {% else %}
+                                <span class="text-warning">Pending</span>
+                            {% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endif %}
 {% endblock %}
