@@ -1,2 +1,3 @@
-# bitcoin
-Sistema que permiti ao usuário através de uma interface simples, enviar e receber frações de moedas, utilizando a testnet​ do Bitcoin.
+# Bitcoin
+
+Sistema para enviar e receber frações de moedas, utilizando uma rede blockchain alternativa do Bitcoin para testes

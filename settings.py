@@ -2,11 +2,11 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'olnsu1ad*#5r()&yt8ldy*v)e6oga2v@%6*v48)cx^m-z)3u14'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 INSTALLED_APPS = [
