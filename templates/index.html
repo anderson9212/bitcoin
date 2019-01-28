@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}Sistema bitcoin - Página inicial{% endblock %}
 
 {% block main %}
@@ -43,7 +42,7 @@
                     <td>{{ data.value }}</td>
                     <td>{{ data.confirmations }}</td>
                     <td>
-                        {% if data.confirmations > 0 %}
+                        {% if data.confirmations > 1 %}
                             <span class="text-success">Done</span>
                         {% else %}
                             <span class="text-warning">Pending</span>

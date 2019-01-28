@@ -35,9 +35,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mt-2 mt-md-0">
-                        <!--<li class="nav-item">-->
-                            <!--<a class="nav-link" href="#">Home</a>-->
-                        <!--</li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'send' %}">Enviar moedas</a>
                         </li>
@@ -48,13 +45,11 @@
                 </div>
             </nav>
         </header>
-
         <main role="main" class="flex-shrink-0">
             <div class="container">
                 {% block main %}{% endblock %}
             </div>
         </main>
-
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>

@@ -1,31 +1,20 @@
 {% extends 'base.html' %}
-
-{% block title %}Sistema bitcoin - Enviar e-mail{% endblock %}
+{% load widget_tweaks %}
+{% block title %}Sistema bitcoin - Enviar frações de moedas{% endblock %}
 
 {% block main %}
-    <form class="form-signin">
+    <form class="form-signin" method="post">{% csrf_token %}
 
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">Enviar frações de moedas</h1>
 
-            <p>safasdfasdfa sdf sfdsdfasafd.
-            </p>
+            <p>safasdfasdfa sdf sfdsdfasafd.</p>
 
         </div>
 
         <div class="form-label-group">
-            <input type="number" min="1" step="any" class="form-control" placeholder="Valor enviado"
-                   required autofocus>
-            <label>Valor enviado</label>
-        </div>
-
-        <div class="form-label-group">
-            <select class="custom-select d-block w-100 form-control" placeholder="Valor enviado" required>
-                <option value="">Escolha uma moeda...</option>
-                {% for data in coin %}
-                    <option value="{{ data.0 }}">{{ data.1 }}</option>
-                {% endfor %}
-            </select>
+            {{ form.value|add_class:"form-control"|attr:"placeholder=Valor enviado" }}
+            <label for="{{ form.value.id_for_label }}">Valor enviado</label>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>

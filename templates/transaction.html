@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}Sistema bitcoin - Transação{% endblock %}
 
 {% block main %}
@@ -13,7 +12,7 @@
     <b>Data de recebido:</b> {{ received|date:'d/m/Y h:i' }}<br>
     <b>Número de confirmações:</b> {{ confirmations }}<br>
     <b>Status:</b>
-        {% if confirmations > 0 %}
+        {% if confirmations > 1 %}
             <span class="text-success">Done</span>
         {% else %}
             <span class="text-warning">Pending</span>

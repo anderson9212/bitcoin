@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-
-{% block title %}Sistema bitcoin - Enviar e-mail{% endblock %}
+{% load widget_tweaks %}
+{% block title %}Sistema bitcoin - Receber frações de moeda{% endblock %}
 
 {% block main %}
-    <form class="form-signin">
+    <form class="form-signin" method="post">{% csrf_token %}
 
         <div class="text-center mb-4">
-            <h1 class="h3 mb-3 font-weight-normal">Enviar frações de moedas</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Receber frações de moedas</h1>
 
             <p>Por favor, nos informe seu e-mail para podermos enviar um token,
                 apenas assim você poderá enviar frações de moedas através de nossa plataforma.
@@ -15,9 +15,8 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de E-mail"
-                   required autofocus>
-            <label for="inputEmail">Endereço de E-mail</label>
+            {{ form.value|add_class:"form-control"|attr:"placeholder=Valor recebido" }}
+            <label for="{{ form.value.id_for_label }}">Valor recebido</label>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>

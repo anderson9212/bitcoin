@@ -1,48 +1,59 @@
-from django.shortcuts import render
-from blockcypher import get_address_details, get_transaction_details, create_unsigned_tx, simple_spend, \
-    list_forwarding_addresses, constants
+from django.shortcuts import render, redirect
+from blockcypher import get_address_details, get_transaction_details, send_faucet_coins
+from apps.site_bitcoin.forms import SendForm, ReceiveForm
+import requests
+
+# Dicionário python com principais parâmetros do sistema
+data_blockcypher = {
+    'address': 'C1meuDnZ4RNBjDhZD6FwLVhG1ecr4sDhfZ',
+    'private': '1c8134cbcbeedebee9ff5add6224cf542ec8d8c82f45d650d404bfb0e4a1aacf',
+    'api_key': 'ca2a67fd0abf46cd938570f4f54b2b1f',
+    'url': 'https://api.blockcypher.com/v1/bcy/test/txs/micro',
+}
 
 
+# Função da tela inicial
 def home(request):
-    # data = get_address_details('1DEP8i3QJCsomS4BSMY2RpU1upv62aGvhD')
-    # data = get_address_details('13vCnAofrX7bskFbnKYyAQzWZNJgRDsmBZ')
-    data = get_address_details('3BF1M1PnTge94QewuWh3B8mRVw8U4SVnb4')
+    data = get_address_details(data_blockcypher['address'], coin_symbol='bcy', txn_limit=10)
     return render(request, 'index.html', data)
 
 
+# Função da tela de transação, passando o hash da transação
 def transaction(request, hash):
-    data = get_transaction_details(hash)
+    data = get_transaction_details(hash, coin_symbol='bcy')
     return render(request, 'transaction.html', data)
 
 
+# Função para envio de frações de moedas
 def send(request):
-    #simple_spend(from_privkey='97838249d77bfa65f97be02b63fd1b7bb6a58474c7c22784a0da63993d1c2f90',
-    #             to_address='C1rGdt7QEPGiwPMFhNKNhHmyoWpa5X92pn', to_satoshis=1000, coin_symbol='bcy',
-    #             api_key='ca2a67fd0abf46cd938570f4f54b2b1f')
+    if request.method == 'POST':
+        form = SendForm(request.POST)
+        if form.is_valid():
+            value = int(form.cleaned_data['value'])
 
-    #inputs = [{'address': 'CEztKBAYNoUEEaPYbkyFeXC5v8Jz9RoZH9'}, ]
-    #outputs = [{'address': 'C1rGdt7QEPGiwPMFhNKNhHmyoWpa5X92pn', 'value': 1000000}]
-    #unsigned_tx = create_unsigned_tx(inputs=inputs, outputs=outputs, coin_symbol='bcy', api_key='ca2a67fd0abf46cd938570f4f54b2b1f')
-    #unsigned_tx
+            data = {'from_private': data_blockcypher['private'],
+                    'to_address': data_blockcypher['address'], 'value_satoshis': value}
+            params = {'token': data_blockcypher['api_key']}
+            requests.post(data_blockcypher['url'], data=data, params=params)
 
-    #print(unsigned_tx)
+            return redirect('home')
+    else:
+        form = SendForm()
 
-    data = {}
-    data['coin'] = constants.COIN_CHOICES
-    return render(request, 'send.html', data)
+    return render(request, 'send.html', {'form': form})
 
 
+# Função para receber frações de moedas
 def receive(request):
-    return render(request, 'receive.html')
+    if request.method == 'POST':
+        form = ReceiveForm(request.POST)
+        if form.is_valid():
+            value = int(form.cleaned_data['value'])
+            send_faucet_coins(address_to_fund=data_blockcypher['address'], satoshis=value,
+                              api_key=data_blockcypher['api_key'])
 
+            return redirect('home')
+    else:
+        form = ReceiveForm()
 
-def email():
-    pass
-
-
-def send_email(request):
-    return render(request, 'form_email.html')
-
-
-def confirm_email():
-    pass
+    return render(request, 'receive.html', {'form': form})
