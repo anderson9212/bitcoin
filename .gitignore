@@ -3,3 +3,4 @@
 venv
 *.pyc
 sis_bitcoin/__pycache__/
+sis_bitcoin.pem
