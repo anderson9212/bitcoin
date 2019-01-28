@@ -6,7 +6,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['3.16.243.115', '127.0.0.1']
+ALLOWED_HOSTS = ['bitcoin.debr.com.br', '127.0.0.1']
 
 
 INSTALLED_APPS = [
