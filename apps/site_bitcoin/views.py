@@ -14,13 +14,17 @@ data_blockcypher = {
 
 # Função da tela inicial
 def home(request):
+    # Armazena na variável data informações do endereço ao passar o hash do endereço e a moeda
     data = get_address_details(data_blockcypher['address'], coin_symbol='bcy', txn_limit=10)
+    # Retorna uma página HTML com informações do endereço
     return render(request, 'index.html', data)
 
 
 # Função da tela de transação, passando o hash da transação
 def transaction(request, hash):
+    # Armazena na variável data informações da transação ao passar o hash da transação e a moeda
     data = get_transaction_details(hash, coin_symbol='bcy')
+    # Retorna uma página HTML com informações da transação
     return render(request, 'transaction.html', data)
 
 
