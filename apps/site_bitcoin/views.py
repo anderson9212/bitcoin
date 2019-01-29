@@ -5,8 +5,8 @@ import requests
 
 # Dicionário python com principais parâmetros do sistema
 data_blockcypher = {
-    'address': 'Bz45dH1HTfTWbTNK6V1xaagTVoj1uqXXSX',
-    'private': '2a7f4544664bc22f72f9a9e0b01c4db6b365679d5258b1c2967aa2722f0d656c',
+    'address': 'BuPY4atfKzg5T5upXak7Hb4estsevLFPPh',
+    'private': 'b1798c6c41f4dfc3466cf3b9a08cd5f7bc2d0bcb07106da673a913fea44a9a28',
     'api_key': 'ca2a67fd0abf46cd938570f4f54b2b1f',
     'url': 'https://api.blockcypher.com/v1/bcy/test/txs/micro',
 }
@@ -47,11 +47,10 @@ def send(request):
             # Requisição post com informações sobre a transaçaão
             r = requests.post(data_blockcypher['url'], data=data, params=params)
 
-            # Verifica se existe erro na requisição
-            if r.json()['error']:
+            try:
                 # Retorna a página HTML para enviar frações de moedas com o erro
                 return render(request, 'send.html', {'form': form, 'error': r.json()['error']})
-            else:
+            except KeyError:
                 # Redireciona para a home(página inicial)
                 return redirect('home')
     else:
