@@ -3,16 +3,18 @@
 
 {% block main %}
 
-    <h2 class="tit">Informações sobre o endereço</h2>
-    <b>Endereço:</b> {{ address }}<br>
-    <b>Total de satoshis recebidos(confirmado):</b> {{ total_received }}<br>
-    <b>Total de satoshis enviados(confirmado):</b> {{ total_sent }}<br>
-    <b>Saldo(confirmado):</b> {{ balance }}<br>
-    <b>Saldo(não confirmado):</b> {{ unconfirmed_balance }}<br>
-    <b>Saldo total(confirmados e não confirmados):</b> {{ final_balance }}<br>
-    <b>Número de transações(confirmadas):</b> {{ n_tx }}<br>
-    <b>Número de transações(não confirmadas):</b> {{ unconfirmed_n_tx }}<br>
-    <b>Número total de transações(confirmados e não confirmados):</b> {{ final_n_tx }}
+    <h4 class="tit">Informações sobre o endereço</h4>
+    <div class="info_top">
+        <b>Endereço:</b> {{ address }}<br>
+        <b>Total de satoshis recebidos<span class="text-danger">*</span>:</b> {{ total_received }}<br>
+        <b>Total de satoshis enviados<span class="text-danger">*</span>:</b> {{ total_sent }}<br>
+        <b>Saldo<span class="text-danger">*</span>:</b> {{ balance }}<br>
+        <b>Saldo<span class="text-danger">**</span>:</b> {{ unconfirmed_balance }}<br>
+        <b>Saldo total<span class="text-danger">***</span>:</b> {{ final_balance }}<br>
+        <b>Número de transações<span class="text-danger">*</span>:</b> {{ n_tx }}<br>
+        <b>Número de transações<span class="text-danger">**</span>:</b> {{ unconfirmed_n_tx }}<br>
+        <b>Número total de transações<span class="text-danger">***</span>:</b> {{ final_n_tx }}
+    </div>
 
     <br><br>
 
