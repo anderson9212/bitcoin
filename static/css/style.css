@@ -147,6 +147,9 @@ body {
     line-height: 17px;
 }
 
-.info_top{
+.info_top b{
     font-size: 14px;
+}
+.info_top{
+    font-size: 12px;
 }
