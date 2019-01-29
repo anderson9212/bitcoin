@@ -13,5 +13,12 @@
             <label for="{{ form.value.id_for_label }}">Valor enviado</label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+
+        {% if error %}
+            <div>
+                <p class="text-danger">{{ error }}</p>
+            </div>
+        {% endif %}
+
     </form>
 {% endblock %}

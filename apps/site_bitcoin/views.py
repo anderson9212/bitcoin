@@ -4,16 +4,9 @@ from apps.site_bitcoin.forms import SendForm, ReceiveForm
 import requests
 
 # Dicionário python com principais parâmetros do sistema
-"""data_blockcypher = {
-    'address': 'C1meuDnZ4RNBjDhZD6FwLVhG1ecr4sDhfZ',
-    'private': '1c8134cbcbeedebee9ff5add6224cf542ec8d8c82f45d650d404bfb0e4a1aacf',
-    'api_key': 'ca2a67fd0abf46cd938570f4f54b2b1f',
-    'url': 'https://api.blockcypher.com/v1/bcy/test/txs/micro',
-}"""
-
 data_blockcypher = {
-    'address': 'CAJPpxQ68hoGzQQcdHn2ZxuS7a6kijpGwy',
-    'private': 'd3133c6bdd2e4f9c787c96ef1cb707f1c89f57794646cf2f13554d9e22a226c1',
+    'address': 'Bz45dH1HTfTWbTNK6V1xaagTVoj1uqXXSX',
+    'private': '2a7f4544664bc22f72f9a9e0b01c4db6b365679d5258b1c2967aa2722f0d656c',
     'api_key': 'ca2a67fd0abf46cd938570f4f54b2b1f',
     'url': 'https://api.blockcypher.com/v1/bcy/test/txs/micro',
 }
@@ -41,6 +34,7 @@ def send(request):
     if request.method == 'POST':
         # Armazena os dados enviado pelo formulário na variável form
         form = SendForm(request.POST)
+
         # Verifica se o valor submetido no formulário é válido
         if form.is_valid():
             # Transforma o valor retornado em inteiro
@@ -51,9 +45,15 @@ def send(request):
             # Passando a api_token para validar o envio
             params = {'token': data_blockcypher['api_key']}
             # Requisição post com informações sobre a transaçaão
-            requests.post(data_blockcypher['url'], data=data, params=params)
-            # Redireciona para a home(página inicial)
-            return redirect('home')
+            r = requests.post(data_blockcypher['url'], data=data, params=params)
+
+            # Verifica se existe erro na requisição
+            if r.json()['error']:
+                # Retorna a página HTML para enviar frações de moedas com o erro
+                return render(request, 'send.html', {'form': form, 'error': r.json()['error']})
+            else:
+                # Redireciona para a home(página inicial)
+                return redirect('home')
     else:
         # Passa para a variável form os dados da classe form
         form = SendForm()
@@ -67,6 +67,7 @@ def receive(request):
     if request.method == 'POST':
         # Armazena os dados enviado pelo formulário na variável form
         form = ReceiveForm(request.POST)
+
         # Verifica se o valor submetido no formulário é válido
         if form.is_valid():
             # Transforma o valor retornado em inteiro
