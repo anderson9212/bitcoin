@@ -3,7 +3,7 @@
 
 {% block main %}
 
-    <h2>Informações sobre o endereço</h2>
+    <h2 class="tit">Informações sobre o endereço</h2>
     <b>Endereço:</b> {{ address }}<br>
     <b>Total de satoshis recebidos(confirmado):</b> {{ total_received }}<br>
     <b>Total de satoshis enviados(confirmado):</b> {{ total_sent }}<br>
@@ -16,14 +16,14 @@
 
     <br><br>
 
-    <p>
-          * Transações confirmadas = Entraram em um bloco(confirmations > 0)<br>
-         ** Transações não confirmadas = Não entraram em um bloco(confirmations <= 0)<br>
-        *** Transações confirmadas e não confirmadas
+    <p class="p_legend">
+        <span class="text-danger">*</span> Transações confirmadas = Entraram em um bloco(confirmations > 0)<br>
+        <span class="text-danger">**</span> Transações não confirmadas = Não entraram em um bloco(confirmations <= 0)<br>
+        <span class="text-danger">***</span> Transações confirmadas e não confirmadas
     </p>
 
     {% if txrefs %}
-        <h4>Informações das últimas transações desse endereço</h4>
+        <h4 class="tit_sub">Informações das últimas transações desse endereço</h4>
         <div class="table-responsive table-responsive-sm table-responsive-md table-responsive-lg">
             <table class="table table-striped table-hover">
                 <thead>

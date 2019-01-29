@@ -137,3 +137,12 @@ body {
         font-size: 3.5rem;
     }
 }
+
+
+.tit_sub {
+    margin-top: 40px;
+}
+.p_legend{
+    font-size: 13px;
+    line-height: 17px;
+}
