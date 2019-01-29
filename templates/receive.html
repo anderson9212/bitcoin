@@ -4,21 +4,14 @@
 
 {% block main %}
     <form class="form-signin" method="post">{% csrf_token %}
-
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">Receber frações de moedas</h1>
-
-            <p>Por favor, nos informe seu e-mail para podermos enviar um token,
-                apenas assim você poderá enviar frações de moedas através de nossa plataforma.
-            </p>
-
+            <p>Informe o valor que deseja receber em satoshis, entre 1 e 1.000.000</p>
         </div>
-
         <div class="form-label-group">
             {{ form.value|add_class:"form-control"|attr:"placeholder=Valor recebido" }}
             <label for="{{ form.value.id_for_label }}">Valor recebido</label>
         </div>
-
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
     </form>
 {% endblock %}

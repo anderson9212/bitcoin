@@ -4,19 +4,14 @@
 
 {% block main %}
     <form class="form-signin" method="post">{% csrf_token %}
-
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">Enviar frações de moedas</h1>
-
-            <p>safasdfasdfa sdf sfdsdfasafd.</p>
-
+            <p>Informe o valor que deseja enviar em satoshis, entre 7.000 e 4.000.000</p>
         </div>
-
         <div class="form-label-group">
             {{ form.value|add_class:"form-control"|attr:"placeholder=Valor enviado" }}
             <label for="{{ form.value.id_for_label }}">Valor enviado</label>
         </div>
-
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
     </form>
 {% endblock %}
